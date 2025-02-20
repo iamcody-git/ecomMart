@@ -3,9 +3,10 @@ import connectDB from "./dbConfig";
 import User from "@/models/User";
 
 // Create a client to send and receive events
-export const inngest = new Inngest({ id: "quickcart-next",
-    signingKey: process.env.INNGEST_SIGNING_KEY,
- });
+export const inngest = new Inngest({ 
+  id: "quickcart-next",
+  signingKey: process.env.INNGEST_SIGNING_KEY,
+});
 
 // Inngest function to save user data in the database
 export const syncUserCreation = inngest.createFunction(
@@ -59,7 +60,7 @@ export const syncUserUpdation = inngest.createFunction(
 // Inngest function to delete user from the database
 export const syncUserDeletion = inngest.createFunction(
   { id: "delete-user-with-clerk" },
-  { event: "clerk/user.deleted" }, // Fixed event name
+  { event: "clerk/user.deleted" },
   async ({ event }) => {
     try {
       await connectDB();
